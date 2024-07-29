@@ -17,7 +17,5 @@ if __name__ == '__main__':
         system_content = f.read()
 
 
-    chat_completion = generate_encounter(client, system_content, input("Prompt: "))
-
-    for chunk in chat_completion:
-        print(chunk.choices[0].delta.content or "", end="")
+    encounter = generate_encounter(client, system_content, input("Prompt: "))
+    encounter.printEncounter()
