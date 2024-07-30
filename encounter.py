@@ -8,11 +8,14 @@ class Encounter:
 
     def printEncounter(self) -> None:
         print(self.intro_text)
-        print(self.monster_json)
+        print(json.dumps(self.monster_json))
 
 
-def generate_encounter(client: Groq, system_content: str, user_content: str, temp: float=0.2) -> list:
-    monster_json = client.chat.completions.create(
+def generate_encounter(client: Groq, system_content: str, user_content: str) -> list:
+    with open("schema.json", "r") as file:
+        schema: json = json.load(file)
+
+    monster_json: json = json.loads(client.chat.completions.create(
         model="llama-3.1-70b-versatile",
         messages=[
             {
@@ -21,14 +24,23 @@ def generate_encounter(client: Groq, system_content: str, user_content: str, tem
             },
             {
                 "role": "user",
-                "content": "!E_JSON " + user_content
+                "content": user_content + " using the json schema: " + json.dumps(schema),
             }
             
         ],
-        temperature=temp,
+        temperature=0.15,
         stream=False,
         response_format={"type": "json_object"}
-    ).choices[0].message.content
+    ).choices[0].message.content)
+
+    encounter_summary: str = ""
+
+    for monster in monster_json["Monsters"]:
+        encounter_summary += str(monster["count"]) + monster["name"]
+        if monster["count"] > 1:
+            encounter_summary += "s\n"
+        else:
+            encounter_summary += "\n"
 
     intro = client.chat.completions.create(
         model="llama-3.1-70b-versatile",
@@ -39,10 +51,10 @@ def generate_encounter(client: Groq, system_content: str, user_content: str, tem
             },
             {
                 "role": "user",
-                "content": "!E_INTRO " + user_content,
+                "content": "Write an intro to an encounter using the prompt: " + user_content + " and using the monsters: " + encounter_summary
             }
         ],
-        temperature=temp,
+        temperature=0.3,
         stream=False
     ).choices[0].message.content
 
