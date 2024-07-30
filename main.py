@@ -16,5 +16,4 @@ if __name__ == '__main__':
     with open("sysprompt.txt", "r") as f:
         system_content = f.read()
 
-    encounter = generate_encounter(client, system_content, input("Prompt: "))
-    encounter.printEncounter()
+    generate_encounter(client, system_content, input("Prompt: ")).printEncounter()

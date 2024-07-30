@@ -8,18 +8,21 @@ class Encounter:
 
     def printEncounter(self) -> None:
         print(self.intro_text)
-        
+        print()
+
         for monster in self.monster_json["Monsters"]:
             for key, value in monster.items():
                 print(key, " ", value)
 
+            print()
 
-def generate_encounter(client: Groq, system_content: str, user_content: str) -> list:
+
+def generate_encounter(client: Groq, system_content: str, user_content: str) -> Encounter:
     with open("schema.json", "r") as file:
         schema: json = json.load(file)
 
     monster_json: json = json.loads(client.chat.completions.create(
-        model="llama-3.1-70b-versatile",
+        model="llama-3.1-8b-instant",
         messages=[
             {
                 "role": "system",
@@ -45,8 +48,8 @@ def generate_encounter(client: Groq, system_content: str, user_content: str) -> 
         else:
             encounter_summary += "\n"
 
-    intro = client.chat.completions.create(
-        model="llama-3.1-70b-versatile",
+    intro: str = client.chat.completions.create(
+        model="llama-3.1-8b-instant",
         messages=[
             {
                 "role": "system",
