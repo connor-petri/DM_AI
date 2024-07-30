@@ -41,6 +41,7 @@ def generate_encounter():
         print(e)
         return jsonify({"error": str(e)})
 
+
 @app.route("/encounter-intro", methods=["GET"])
 def generate_intro():
     with open("./resources/sysprompt.txt", "r") as f:
