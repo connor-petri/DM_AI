@@ -8,7 +8,10 @@ class Encounter:
 
     def printEncounter(self) -> None:
         print(self.intro_text)
-        print(json.dumps(self.monster_json))
+        
+        for monster in self.monster_json["Monsters"]:
+            for key, value in monster.items():
+                print(key, " ", value)
 
 
 def generate_encounter(client: Groq, system_content: str, user_content: str) -> list:
