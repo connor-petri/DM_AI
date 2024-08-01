@@ -1,13 +1,6 @@
-from setuptools import setup, find_packages
+import os
 
-setup(
-    name='DM_AI',
-    version='0.1',
-    packages=find_packages(),
-    include_package_data=True,
-    install_requires=[
-        'flask',
-        'groq',
-        'python-dotenv'
-    ],
-)
+packages = ['flask', 'groq', 'python-dotenv', 'flask-login', 'psycopg2', 'sqlalchemy', 'sqlalchemy-utils']
+
+for package in packages:
+    os.system(f'pip install {package}')

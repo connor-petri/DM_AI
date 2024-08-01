@@ -1,5 +1,7 @@
-from endpoints.app import app
-from endpoints import routes
+from endpoints.app import app, db
+from endpoints import routes, user
 
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
     app.run(debug=True)
