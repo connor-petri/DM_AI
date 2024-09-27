@@ -1,6 +1,6 @@
 import json
 from flask import request, jsonify
-from endpoints.app import app
+from app import app
 from resources.settings import client
 
 

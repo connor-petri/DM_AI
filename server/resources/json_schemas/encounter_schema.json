@@ -1,7 +1,7 @@
 {
-    "Monsters":[
+    "Monsters": [
       {
-        "count": 1,
+        "statblock": {
         "name": "Beholder",
         "size": "large",
         "type": "aberration",
@@ -10,30 +10,42 @@
         "hp": 189,
         "hit_dice": "19d10+76",
         "speed": "0 ft., fly 20 ft. (hover)",
-        "stats": [
-          10,
-          14,
-          18,
-          17,
-          15,
-          17
-        ],
-        "saves": [
-          {
-            "intelligence": 8
-          },
-          {
-            "wisdom": 7
-          },
-          {
-            "charisma": 8
-          }
-        ],
-        "skillsaves": [
-          {
-            "Perception": 12
-          }
-        ],
+        "stats": {
+          "strength": 10,
+          "dexterity": 14,
+          "constitution": 18,
+          "intelligence": 17,
+          "wisom": 15,
+          "charisma": 17
+        },
+        "saves": {
+          "strength": 0,
+          "dexterity": 0,
+          "constitution": 0,
+          "intelligence": 8,
+          "wisom": 7,
+          "charisma": 8
+        },
+        "skills": {
+          "acrobatics": 0,
+          "animal_handling": 0,
+          "arcana": 0,
+          "athletics": 0,
+          "deception": 0,
+          "history": 0,
+          "insight": 0,
+          "intimidation": 0,
+          "investigation": 0,
+          "medicine": 0,
+          "nature": 0,
+          "perception": 12,
+          "performance": 0,
+          "persuasion": 0,
+          "religion": 0,
+          "sleight_of_hand": 0,
+          "stealth": 0,
+          "survival": 0
+        },
         "damage_vulnerabilities": "",
         "damage_resistances": "",
         "damage_immunities": "",
@@ -42,10 +54,6 @@
         "languages": "Deep Speech, Undercommon",
         "cr": "13",
         "traits": [
-          {
-            "name": "Source",
-            "desc": "Monster Manual p. 28"
-          },
           {
             "name": "Antimagic Cone",
             "desc": "The beholder's central eye creates an area of antimagic, as in the antimagic field spell, in a 150-foot cone. At the start of each of its turns, the beholder decides which way the cone faces and whether the cone is active. The area works against the beholder's own eye rays."
@@ -74,6 +82,8 @@
         ],
         "reactions": [],
         "source": "Monster Manual page 26"
-      }
-    ]
+      },
+      "count": 1
+    }
+  ]
 }
