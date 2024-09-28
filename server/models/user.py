@@ -1,5 +1,5 @@
 from flask_login import UserMixin
-from flask_bcrypt import generate_password_hash, check_password_hash
+from flask_bcrypt import generate_password_hash
 
 from app import db
 
@@ -12,7 +12,7 @@ class User(db.Model, UserMixin):
 
     _password = db.Column('password', db.String(255), nullable=False)
 
-    encounters = db.relationshop('Encounter', backref='user', lazy=True)
+    encounters = db.relationship('Encounter', backref=__tablename__, lazy=True)
 
     def _get_password(self):
         return self._password

@@ -1,10 +1,12 @@
 import json
 from flask import request, jsonify
+from flask_login import login_required
 from app import app
 from resources.settings import client
 
 
-@app.route("/encounter-json", methods=["GET"])
+@app.route("/generate_encounter", methods=["POST"])
+@login_required
 def generate_encounter():
     try:
 
@@ -20,7 +22,7 @@ def generate_encounter():
             schema: json = json.load(file)
 
         # Request a chat completion from the model, passing in the system and user content, and the JSON schema
-        return jsonify(client.chat.completions.create(
+        encounter_json = jsonify(client.chat.completions.create(
             model="llama-3.1-8b-instant",
             messages=[
                 {
