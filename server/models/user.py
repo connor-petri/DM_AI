@@ -10,19 +10,6 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(32), nullable=False, unique=True)
 
-    _password = db.Column('password', db.String(255), nullable=False)
-
-    encounters = db.relationship('Encounter', backref=__tablename__, lazy=True)
-
-    def _get_password(self):
-        return self._password
-    
-    def _set_password(self, password):
-        self._password = generate_password_hash(password)
-
-    # Hide password encryption by exposing password field only.
-    password = db.synonym('_password', 
-                          descriptor=property(_get_password, 
-                                              _set_password))
+    password = db.Column(db.String(255), nullable=False)
     
 

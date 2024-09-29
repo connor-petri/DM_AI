@@ -1,5 +1,6 @@
 from app import db
 
+from user import User
 
 monster_encounter = db.Table('monster_encounter',
                              db.Column('encounter_id', db.Integer, db.ForeignKey('encounters.id'), primary_key=True),
@@ -14,6 +15,9 @@ class Encounter(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     monsters = db.relationship('Monster', backref=__tablename__, secondary=monster_encounter, lazy=True)
+
+
+User.encounters = db.relationship('Encounter', backref=User.__tablename__, lazy=True)
 
 
 class Monster(db.Model):

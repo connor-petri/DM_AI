@@ -1,10 +1,10 @@
 from flask import request, jsonify
-from flask_login import user_loader, login_user, login_required, logout_user
-
+from flask_login import login_user, login_required, logout_user
+import json
 
 from app import app, db, login_manager
-from ..models.user import User
-from ..controllers.user import authenticate_user, register_user
+from models.user import User
+from controllers.user import authenticate_user, register_user
 
 
 
@@ -12,14 +12,14 @@ from ..controllers.user import authenticate_user, register_user
 
 @app.route('/login', methods=['POST'])
 def login():
-    return authenticate_user(request.get_json())
+    return authenticate_user(json.loads(request.get_json()))
     
     
     
 
-@app.route('/register', methods=['POST'])
+@app.route('/register', methods=['PUT'])
 def register():
-    return register_user(request.get_json())
+    return register_user(json.loads(request.get_json()))
 
 
 @app.route('/logout', methods=['POST'])

@@ -1,4 +1,5 @@
 from app import app, db
+from api.user import *
 
 if __name__ == '__main__':
     with app.app_context():
