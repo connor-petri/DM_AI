@@ -1,0 +1,170 @@
+{
+    "type": "object",
+    "properties": {
+        "monsters": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "statblock": {
+                        "type": "object",
+                        "properties": {
+                            "name": {"type": "string"},
+                            "size": {"type": "string"},
+                            "type": {"type": "string"},
+                            "alignment": {"type": "string"},
+                            "ac": {"type": "integer"},
+                            "hp": {"type": "integer"},
+                            "hit_dice": {"type": "string"},
+                            "speed": {"type": "string"},
+                            "stats": {
+                                "type": "object",
+                                "properties": {
+                                        "strength": {"type": "integer"},
+                                        "dexterity": {"type": "integer"},
+                                        "constitution": {"type": "integer"},
+                                        "intelligence": {"type": "integer"},
+                                        "wisdom": {"type": "integer"},
+                                        "charisma": {"type": "integer"}
+                                    }
+                            },
+                            "saves": {
+                                "type": "object",
+                                "properties": {
+                                        "strength": {"type": "integer"},
+                                        "dexterity": {"type": "integer"},
+                                        "constitution": {"type": "integer"},
+                                        "intelligence": {"type": "integer"},
+                                        "wisdom": {"type": "integer"},
+                                        "charisma": {"type": "integer"}
+                                    }
+                            },
+                            "skills": {
+                                "type": "object",
+                                "properties": {
+                                    "acrobatics": {"type": "integer"},
+                                    "animal_handling": {"type": "integer"},
+                                    "arcana": {"type": "integer"},
+                                    "athletics": {"type": "integer"},
+                                    "deception": {"type": "integer"},
+                                    "history": {"type": "integer"},
+                                    "insight": {"type": "integer"},
+                                    "intimidation": {"type": "integer"},
+                                    "investigation": {"type": "integer"},
+                                    "medicine": {"type": "integer"},
+                                    "nature": {"type": "integer"},
+                                    "perception": {"type": "integer"},
+                                    "performance": {"type": "integer"},
+                                    "persuasion": {"type": "integer"},
+                                    "religion": {"type": "integer"},
+                                    "sleight_of_hand": {"type": "integer"},
+                                    "stealth": {"type": "integer"},
+                                    "survival": {"type": "integer"}
+                                }
+                            },
+                            "vulnerabilities": {"type": "string"},
+                            "resistances": {"type": "string"},
+                            "damage_immunities": {"type": "string"},
+                            "condition_immunities": {"type": "string"},
+                            "senses": {"type": "string"},
+                            "languages": {"type": "string"},
+                            "cr": {"type": "string"},
+                            "traits": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {"type": "string"},
+                                        "desc": {"type": "string"}
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {"type": "string"},
+                                        "desc": {"type": "string"}
+                                    }
+                                }
+                            },
+                            "legendary_actions": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {"type": "string"},
+                                        "desc": {"type": "string"}
+                                    }
+                                }
+                            },
+                            "reactions": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {"type": "string"},
+                                        "desc": {"type": "string"}
+                                    }
+                                }
+                            },
+
+                            "spell_list": {
+                                "type": "object",
+                                "properties": {
+                                    "cantrips": {
+                                        "type": "array",
+                                        "items": {"type": "string"}
+                                    },
+                                    "first": {
+                                        "type": "array",
+                                        "items": {"type": "string"}
+                                    },
+                                    "second": {
+                                        "type": "array",
+                                        "items": {"type": "string"}
+                                    },
+                                    "third": {
+                                        "type": "array",
+                                        "items": {"type": "string"}
+                                    },
+                                    "fourth": {
+                                        "type": "array",
+                                        "items": {"type": "string"}
+                                    },
+                                    "fifth": {
+                                        "type": "array",
+                                        "items": {"type": "string"}
+                                    },
+                                    "sixth": {
+                                        "type": "array",
+                                        "items": {"type": "string"}
+                                    },
+                                    "seventh": {
+                                        "type": "array",
+                                        "items": {"type": "string"}
+                                    },
+                                    "eighth": {
+                                        "type": "array",
+                                        "items": {"type": "string"}
+                                    },
+                                    "ninth": {
+                                        "type": "array",
+                                        "items": {"type": "string"}
+                                    }
+                                }
+                            },
+
+                            "source": {"type": "string"}
+                        },
+                        "required": ["name", "size", "type", "alignment", "ac", "hp", "hit_dice", "speed", "stats", "saves", "skills", "vulnerabilities", "resistances", "damage_immunities", "condition_immunities", "senses", "languages", "cr", "traits", "spell_list", "actions", "legendary_actions", "reactions", "source"]
+                    },
+                    "count": {"type": "integer"}
+                },
+                "required": ["statblock", "count"]
+            }
+        }
+    },
+    "required": ["monsters"]
+}

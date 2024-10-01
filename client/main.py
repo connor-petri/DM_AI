@@ -20,6 +20,12 @@ def register(username, password):
     return session.put(ip + "/register", json=data)
 
 
+def generate_encounter(prompt: str):
+    data = json.dumps({"prompt": prompt})
+
+    return session.post(ip + "/generate_encounter", json=data)
+
+
 while True:
     command_list: list = input().split(" ")
 
@@ -56,5 +62,18 @@ while True:
         
         response = register(command_list[1], command_list[2])
 
+    elif command == "generate_encounter":
+        if len(command_list) < 2:
+            print("generate_encounter [prompt]")
+            continue
+
+        prompt = " ".join(command[1:])
+
+        response = generate_encounter(prompt)
+
+    else:
+        print("Invalid command")
+
     # print(f"{response.json['status']}: {response.json['message']}")
-    print(response.text)
+    if response:
+        print(response.text)

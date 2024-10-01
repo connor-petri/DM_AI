@@ -1,6 +1,6 @@
 from app import db
 
-from user import User
+from models.user import User
 
 monster_encounter = db.Table('monster_encounter',
                              db.Column('encounter_id', db.Integer, db.ForeignKey('encounters.id'), primary_key=True),
@@ -14,7 +14,7 @@ class Encounter(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
-    monsters = db.relationship('Monster', backref=__tablename__, secondary=monster_encounter, lazy=True)
+    monsters = db.relationship('Monster', secondary=monster_encounter, lazy=True)
 
 
 User.encounters = db.relationship('Encounter', backref=User.__tablename__, lazy=True)
@@ -25,7 +25,7 @@ class Monster(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
 
-    encounters = db.relationship('Encounter', backref=__tablename__, secondary=monster_encounter, lazy=True)
+    encounters = db.relationship('Encounter', secondary=monster_encounter, lazy=True)
 
     # info
     name = db.Column(db.String(50), nullable=False)
@@ -78,13 +78,13 @@ class Monster(db.Model):
     condition_immunities = db.Column(db.String(100))
     senses = db.Column(db.String(50))
     languages = db.Column(db.String(50))
-    cr = db.Column(db.Integer, nullable=False)
+    cr = db.Column(db.String(10), nullable=False)
 
-    traits = db.relationship('Trait', backref='monster', lazy=True)
-    spells = db.relationship('Spell', backref='monster', lazy=True)
-    actions = db.relationship('Action', backref='monster', lazy=True)
-    legendary_actions = db.relationship('LegendaryAction', backref='monster', lazy=True)
-    reactions = db.relationship('Reaction', backref='monster', lazy=True)
+    traits = db.relationship('Trait', backref=__tablename__, lazy=True)
+    actions = db.relationship('Action', backref=__tablename__, lazy=True)
+    legendary_actions = db.relationship('LegendaryAction', backref=__tablename__, lazy=True)
+    reactions = db.relationship('Reaction', backref=__tablename__, lazy=True)
+    spell_list = db.relationship("SpellList", backref=__tablename__, lazy=True)
 
     source = db.Column(db.String(50))
 
@@ -98,13 +98,22 @@ class Trait(db.Model):
     description = db.Column(db.String(200))
 
 
-class Spell(db.Model):
-    __tablename__ = 'spells'
+class SpellList(db.Model):
+    __tablename__ = 'spell_lists'
 
     id = db.Column(db.Integer, primary_key=True)
     monster_id = db.Column(db.Integer, db.ForeignKey('monsters.id'), nullable=False)
-    name = db.Column(db.String(50), nullable=False)
-    description = db.Column(db.String(200))
+
+    cantrips = db.Column(db.String(255))
+    first = db.Column(db.String(255))
+    second = db.Column(db.String(255))
+    third = db.Column(db.String(255))
+    fourth = db.Column(db.String(255))
+    fifth = db.Column(db.String(255))
+    sixth = db.Column(db.String(255))
+    seventh = db.Column(db.String(255))
+    eighth = db.Column(db.String(255))
+    ninth = db.Column(db.String(255))
 
 
 class Action(db.Model):

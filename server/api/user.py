@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_required, logout_user
 import json
 
 from app import app, db, login_manager

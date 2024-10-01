@@ -4,44 +4,13 @@ from flask_login import login_required
 from app import app
 from resources.settings import client
 
+from controllers.encounters import create_new_encounter
+
 
 @app.route("/generate_encounter", methods=["POST"])
 @login_required
 def generate_encounter():
-    try:
-
-        # Load the system content from a file
-        with open("./resources/sysprompts/json_requests.txt", "r") as f:
-            system_content: str = f.read()
-
-        # Get the user content from the query string
-        user_content: str = request.args.get("prompt", default="", type=str)
-
-        # Load the JSON schema for the encounter
-        with open("./resources/schemas/encounter_schema.json", "r") as file:
-            schema: json = json.load(file)
-
-        # Request a chat completion from the model, passing in the system and user content, and the JSON schema
-        encounter_json = jsonify(client.chat.completions.create(
-            model="llama-3.1-8b-instant",
-            messages=[
-                {
-                    "role": "system",
-                    "content": system_content
-                },
-                {
-                    "role": "user",
-                    "content": user_content + " using the json schema: " + json.dumps(schema),
-                }
-            ],
-            temperature=0.15,
-            stream=False,
-            response_format={"type": "json_object"}
-        ).choices[0].message.content)
-    
-    except Exception as e:
-        print(e)
-        return jsonify({"error": str(e)})
+    return create_new_encounter(request.args.get("prompt", default="", type=str))
 
 
 @app.route("/encounter-intro", methods=["GET"])
@@ -71,7 +40,10 @@ def generate_intro():
         ).choices[0].message.content)
     
     except Exception as e:
-        print(e)
+        print(str(e))
         return jsonify({"error": str(e)})
     
+
+
+
 

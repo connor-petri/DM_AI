@@ -1,6 +1,6 @@
 import json
 from flask import jsonify
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user
 from flask_bcrypt import generate_password_hash, check_password_hash
 from sqlalchemy.exc import SQLAlchemyError
 

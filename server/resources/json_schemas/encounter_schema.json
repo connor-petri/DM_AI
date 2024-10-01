@@ -1,44 +1,42 @@
 {
-    "Monsters": [
-      {
-        "statblock": {
-        "name": "Beholder",
-        "size": "large",
-        "type": "aberration",
+  "monsters": [
+    {
+      "statblock": {
+        "name": "Lich",
+        "size": "medium",
+        "type": "undead",
         "alignment": "lawful evil",
         "ac": 18,
-        "hp": 189,
-        "hit_dice": "19d10+76",
-        "speed": "0 ft., fly 20 ft. (hover)",
+        "hp": 250,
+        "hit_dice": "20d10+100",
+        "speed": "30 ft.",
         "stats": {
-          "strength": 10,
-          "dexterity": 14,
-          "constitution": 18,
-          "intelligence": 17,
-          "wisom": 15,
-          "charisma": 17
+          "strength": 16,
+          "dexterity": 12,
+          "constitution": 16,
+          "intelligence": 18,
+          "wisdom": 18,
+          "charisma": 10
         },
         "saves": {
           "strength": 0,
           "dexterity": 0,
           "constitution": 0,
           "intelligence": 8,
-          "wisom": 7,
-          "charisma": 8
+          "wisdom": 9,
+          "charisma": 0
         },
         "skills": {
-          "acrobatics": 0,
+          "arcana": 8,
           "animal_handling": 0,
-          "arcana": 0,
-          "athletics": 0,
           "deception": 0,
-          "history": 0,
-          "insight": 0,
+          "history": 8,
+          "insight": 9,
           "intimidation": 0,
           "investigation": 0,
           "medicine": 0,
           "nature": 0,
-          "perception": 12,
+          "perception": 9,
           "performance": 0,
           "persuasion": 0,
           "religion": 0,
@@ -46,42 +44,65 @@
           "stealth": 0,
           "survival": 0
         },
-        "damage_vulnerabilities": "",
-        "damage_resistances": "",
-        "damage_immunities": "",
-        "condition_immunities": "prone",
-        "senses": "darkvision 120 ft.",
-        "languages": "Deep Speech, Undercommon",
+        "damage_vulnerabilities": "cold",
+        "damage_resistances": "cold, fire, poison",
+        "damage_immunities": "bludgeoning, piercing, slashing from nonmagical attacks",
+        "condition_immunities": "charmed, exhaustion, frightened, paralyzed, petrified, poisoned",
+        "senses": "darkvision 60 ft., passive Perception 14",
+        "languages": "Common, Elvish, Sperethiel",
         "cr": "13",
         "traits": [
           {
-            "name": "Antimagic Cone",
-            "desc": "The beholder's central eye creates an area of antimagic, as in the antimagic field spell, in a 150-foot cone. At the start of each of its turns, the beholder decides which way the cone faces and whether the cone is active. The area works against the beholder's own eye rays."
-          }
-        ],
-        "spells": [],
-        "actions": [
-          {
-            "name": "Bite",
-            "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 14 (4d6) piercing damage."
+            "name": "Spellcasting",
+            "desc": "The lich is a 13th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 16). It knows the following spells:"
           },
           {
-            "name": "Eye Rays",
-            "desc": "The beholder shoots three of the following magical eye rays at random (reroll duplicates), choosing one to three targets it can see within 120 ft. of it: \t1. Charm Ray. The targeted creature must succeed on a DC 16 Wisdom saving throw or be charmed by the beholder for 1 hour, or until the beholder harms the creature. \t2. Paralyzing Ray. The targeted creature must succeed on a DC 16 Constitution saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. \t3. Fear Ray. The targeted creature must succeed on a DC 16 Wisdom saving throw or be frightened for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. \t4. Slowing Ray. The targeted creature must succeed on a DC 16 Dexterity saving throw. On a failed save, the target's speed is halved for 1 minute. In addition, the creature can't take reactions, and it can take either an action or a bonus action on its turn, not both. The creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. \t5. Enervation Ray. The targeted creature must make a DC 16 Constitution saving throw, taking 36 (8d8) necrotic damage on a failed save, or half as much damage on a successful one. \t6. Telekinetic Ray. If the target is a creature, it must succeed on a DC 16 Strength saving throw or the beholder moves it up to 30 ft. in any direction. It is restrained by the ray's telekinetic grip until the start of the beholder's next turn or until the beholder is incapacitated. \tIf the target is an object weighing 300 pounds or less that isn't being worn or carried, it is moved up to 30 ft. in any direction. The beholder can also exert fine control on objects with this ray, such as manipulating a simple tool or opening a door or a container. \t7. Sleep Ray. The targeted creature must succeed on a DC 16 Wisdom saving throw or fall asleep and remain unconscious for 1 minute. The target awakens if it takes damage or another creature takes an action to wake it. This ray has no effect on constructs and undead. \t8. Petrification Ray. The targeted creature must make a DC 16 Dexterity saving throw. On a failed save, the creature begins to turn to stone and is restrained. It must repeat the saving throw at the end of its next turn. On a success, the effect ends. On a failure, the creature is petrified until freed by the greater restoration spell or other magic. \t9. Disintegration Ray. If the target is a creature, it must succeed on a DC 16 Dexterity saving throw or take 45 (10d8) force damage. If this damage reduces the creature to 0 hit points, its body becomes a pile of fine gray dust. \tIf the target is a Large or smaller nonmagical object or creation of magical force, it is disintegrated without a saving throw. If the target is a Huge or larger object or creation of magical force, this ray disintegrates a 10-foot cube of it. \t10. Death Ray. The targeted creature must succeed on a DC 16 Dexterity saving throw or take 55 (10d10) necrotic damage. The target dies if the ray reduces it to 0 hit points."
+            "name": "Undead Fortitude",
+            "desc": "If damage reduces the lich to 0 hit points, it must make a Constitution saving throw with a DC of 5 + the damage taken, rounded down. On a success, the lich drops to 1 hit point instead."
+          }
+        ],
+        "spells": {
+          "cantrips": ["(At will)", "Mage Hand", "Prestidigitation", "Ray of Frost"],
+          "first": ["(4 slots)","Burning Hands", "Charm Person", "Magic Missile", "Shield"],
+          "second": ["(3 slots)", "Invisibility", "Scorching Ray", "Suggestion"],
+          "third": ["(3 slots)", "Fireball"],
+          "fourth": ["(3 slots)", "Dimension Door", "Fire Shield", "Greater Invisibility"],
+          "fifth": ["(3 slots)", "Cloudkill", "Dominate Person", "Hold Monster", "Telekinesis"],
+          "sixth": ["(1 slot)", "Disintegrate", "Wall of Force"],
+          "seventh": ["(1 slot)", "Delayed Blast Fireball"],
+          "eighth": ["(1 slot)", "Dominate Monster", "Power Word Stun"],
+          "ninth": ["(1 slot)", "Power Word Kill"]
+        },
+        "actions": [
+          {
+            "name": "Multiattack",
+            "desc": "The lich makes two melee attacks."
+          },
+          {
+            "name": "Scepter",
+            "desc": "Melee Spell Attack: +5 to hit, reach 5 ft., one target. Hit: 13 (2d6 + 4) force damage."
+          },
+          {
+            "name": "Spell",
+            "desc": "The lich casts a spell from its spell list."
           }
         ],
         "legendary_actions": [
           {
             "name": "Legendary Actions (3/Turn)",
-            "desc": "The beholder can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time, and only at the end of another creature's turn. The beholder regains spent legendary actions at the start of its turn."
+            "desc": "The lich can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time, and only at the end of another creature's turn. The lich regains spent legendary actions at the start of its turn."
           },
           {
-            "name": "Eye Ray",
-            "desc": "The beholder uses one random eye ray."
+            "name": "Cast a Spell",
+            "desc": "The lich casts a spell from its spell list."
+          },
+          {
+            "name": "Make a Melee Attack",
+            "desc": "The lich makes a melee attack."
           }
         ],
         "reactions": [],
-        "source": "Monster Manual page 26"
+        "source": "Monster Manual page 272"
       },
       "count": 1
     }

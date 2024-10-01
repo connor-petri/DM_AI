@@ -1,6 +1,6 @@
 from app import app, db
-import user.models
-import encounters.models
+from models.user import *
+from models.encounters import *
 
 
 if __name__ == "__main__":
