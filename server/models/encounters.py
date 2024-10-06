@@ -2,11 +2,6 @@ from app import db
 
 from models.user import User
 
-monster_encounter = db.Table('monster_encounter',
-                             db.Column('encounter_id', db.Integer, db.ForeignKey('encounters.id'), primary_key=True),
-                             db.Column('monster_id', db.Integer, db.ForeignKey('monsters.id'), primary_key=True),
-                             db.Column('monster_count', db.Integer, nullable=False, default=1))
-
 
 class Encounter(db.Model):
     __tablename__ = 'encounters'
@@ -14,7 +9,7 @@ class Encounter(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
-    monsters = db.relationship('Monster', secondary=monster_encounter, lazy=True)
+    monsters = db.relationship('EncounterMonsterAssociation', back_populates='encounter', lazy=True)
 
 
 User.encounters = db.relationship('Encounter', backref=User.__tablename__, lazy=True)
@@ -25,7 +20,7 @@ class Monster(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
 
-    encounters = db.relationship('Encounter', secondary=monster_encounter, lazy=True)
+    encounters = db.relationship('EncounterMonsterAssociation', back_populates='monster', lazy=True)
 
     # info
     name = db.Column(db.String(50), nullable=False)
@@ -84,9 +79,19 @@ class Monster(db.Model):
     actions = db.relationship('Action', backref=__tablename__, lazy=True)
     legendary_actions = db.relationship('LegendaryAction', backref=__tablename__, lazy=True)
     reactions = db.relationship('Reaction', backref=__tablename__, lazy=True)
-    spell_list = db.relationship("SpellList", backref=__tablename__, lazy=True)
+    spell_list = db.relationship("SpellList", backref=__tablename__, lazy=True, uselist=False)
 
     source = db.Column(db.String(50))
+
+
+class EncounterMonsterAssociation(db.Model):
+    __tablename__ = 'encounter_monster_association'
+
+    encounter_id = db.Column(db.Integer, db.ForeignKey('encounters.id'), primary_key=True)
+    monster_id = db.Column(db.Integer, db.ForeignKey('monsters.id'), primary_key=True)
+    count = db.Column(db.Integer, db.CheckConstraint('count>=0'), nullable=False)
+    encounter = db.relationship('Encounter', back_populates='monsters')
+    monster = db.relationship('Monster', back_populates='encounters')
 
 
 class Trait(db.Model):

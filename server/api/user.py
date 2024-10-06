@@ -7,14 +7,9 @@ from models.user import User
 from controllers.user import authenticate_user, register_user
 
 
-
-
-
 @app.route('/login', methods=['POST'])
 def login():
     return authenticate_user(json.loads(request.get_json()))
-    
-    
     
 
 @app.route('/register', methods=['PUT'])

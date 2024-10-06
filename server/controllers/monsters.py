@@ -90,9 +90,83 @@ def create_new_monster_entry(monster_stats: json) -> Monster:
     create_actions(monster_stats, m)
     create_reactions(monster_stats, m)
     create_legendary_actions(monster_stats, m)
+    create_spell_list(monster_stats, m)
 
     db.session.commit()
     return m
+
+
+def dump_monster(m: Monster) -> dict:
+    return {
+        "id": m.id,
+        "name": m.name,
+        "size": m.size,
+        "type": m.type,
+        "alignment": m.alignment,
+        "ac": m.ac,
+        "hp": m.hp,
+        "hit_dice": m.hit_dice,
+        "speed": m.speed,
+        "stats": {
+            "strength": m.strength,
+            "dexterity": m.dexterity,
+            "constitution": m.constitution,
+            "intelligence": m.intelligence,
+            "wisdom": m.wisdom,
+            "charisma": m.charisma
+        },
+        "saves": {
+            "strength": m.strength_save,
+            "dexterity": m.dexterity_save,
+            "constitution": m.constitution_save,
+            "intelligence": m.intelligence_save,
+            "wisdom": m.wisdom_save,
+            "charisma": m.charisma_save
+        },
+        "skills": {
+            "acrobatics": m.acrobatics,
+            "animal_handling": m.animal_handling,
+            "arcana": m.arcana,
+            "athletics": m.athletics,
+            "deception": m.deception,
+            "history": m.history,
+            "insight": m.insight,
+            "intimidation": m.intimidation,
+            "investigation": m.investigation,
+            "medicine": m.medicine,
+            "nature": m.nature,
+            "perception": m.perception,
+            "persuasion": m.persuasion,
+            "religion": m.religion,
+            "sleight_of_hand": m.sleight_of_hand,
+            "stealth": m.stealth,
+            "survival": m.survival
+        },
+        "vulnerabilities": m.vulnerabilities,
+        "resistances": m.resistances,
+        "damage_immunities": m.damage_immunities,
+        "condition_immunities": m.condition_immunities,
+        "senses": m.senses,
+        "languages": m.languages,
+        "cr": m.cr,
+        "traits": [{"name": t.name, "desc": t.description} for t in m.traits] if m.traits else [],
+        "actions": [{"name": a.name, "desc": a.description} for a in m.actions] if m.actions else [],
+        "legendary_actions": [{"name": la.name, "desc": la.description} for la in m.legendary_actions] if m.legendary_actions else [],
+        "reactions": [{"name": r.name, "desc": r.description} for r in m.reactions] if m.legendary_actions else [],
+        "spell_list": {
+            "cantrips": m.spell_list["cantrips"].split(",") if m.spell_list is not None and m.spell_list["cantrips"] is not None else [],
+            "first": m.spell_list["first"].split(",") if m.spell_list is not None and m.spell_list["first"] is not None else [],
+            "second": m.spell_list["second"].split(",") if m.spell_list is not None and m.spell_list["second"] is not None else [],
+            "third": m.spell_list["third"].split(",") if m.spell_list is not None and m.spell_list["third"] is not None else [],
+            "fourth": m.spell_list["fourth"].split(",") if m.spell_list is not None and m.spell_list["fourth"] is not None else [],
+            "fifth": m.spell_list["fifth"].split(",") if m.spell_list is not None and m.spell_list["fifth"] is not None else [],
+            "sixth": m.spell_list["sixth"].split(",") if m.spell_list is not None and m.spell_list["sixth"] is not None else [],
+            "seventh": m.spell_list["seventh"].split(",") if m.spell_list is not None and m.spell_list["seventh"] is not None else [],
+            "eighth": m.spell_list["eighth"].split(",") if m.spell_list is not None and m.spell_list["eighth"] is not None else [],
+            "ninth": m.spell_list["ninth"].split(",") if m.spell_list is not None and m.spell_list["ninth"] is not None else []
+        },
+        "source": m.source
+    }
 
 
 def create_traits(monster_stats: json, monster: Monster) -> list[Trait]:
@@ -168,19 +242,24 @@ def create_reactions(monster_stats: json, monster: Monster) -> list[Reaction]:
 
 
 def create_spell_list(monster_stats: json, monster: Monster) -> SpellList:
-    s = SpellList(monster_id=monster.id)
     spells = monster_stats["spell_list"]
 
-    s.cantrips = ",".join(spells["cantrips"])
-    s.first = ",".join(spells["first"])
-    s.second = ",".join(spells["second"])
-    s.third = ",".join(spells("third"))
-    s.fourth = ",".join(spells["fourth"])
-    s.fifth = ",".join(spells["fifth"])
-    s.sixth = ",".join(spells["sixth"])
-    s.seventh = ",".join(spells["seventh"])
-    s.eighth = ",".join(spells["eighth"])
-    s.ninth = ",".join(spells["ninth"])
+    # If a monster doesn't have cantrips or first level spells, they probably dont have any higher level ones
+    if spells["cantrips"] == [] or spells["first"] == []:
+        return None
+
+    s = SpellList(monster_id=monster.id)
+
+    s.cantrips = ",".join(spells["cantrips"]) if ",".join(spells["cantrips"]) != "" else None
+    s.first = ",".join(spells["first"]) if ",".join(spells["first"]) != "" else None
+    s.second = ",".join(spells["second"]) if ",".join(spells["second"]) != "" else None
+    s.third = ",".join(spells["third"]) if ",".join(spells["third"]) != "" else None
+    s.fourth = ",".join(spells["fourth"]) if ",".join(spells["fourth"]) != "" else None
+    s.fifth = ",".join(spells["fifth"]) if ",".join(spells["fifth"]) != "" else None
+    s.sixth = ",".join(spells["sixth"]) if ",".join(spells["sixth"]) != "" else None
+    s.seventh = ",".join(spells["seventh"]) if ",".join(spells["seventh"]) != "" else None
+    s.eighth = ",".join(spells["eighth"]) if ",".join(spells["eighth"]) != "" else None
+    s.ninth = ",".join(spells["ninth"]) if ",".join(spells["ninth"]) != "" else None
 
     db.session.add(s)
 
