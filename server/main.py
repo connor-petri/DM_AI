@@ -12,6 +12,11 @@ if __name__ == '__main__':
     if len(argv) == 1:
         app.run(debug=True)
 
+    if argv[1] in ['-h', '-help', '--help']:
+        print(
+            '''-s: Run a script.'''
+            )
+
     elif argv[1] == '-s':
         if len(argv) < 3 or argv[2] not in ["db_create", "load_lib_1"]:
             print(
@@ -30,8 +35,3 @@ if __name__ == '__main__':
             with app.app_context():
                 load_lib_1()
                 print("Monster Library 1 loaded.")  
-            
-    else:
-        print(
-            '''-s: Run a script.'''
-            )

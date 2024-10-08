@@ -154,6 +154,7 @@ def dump_monster(m: Monster) -> dict:
         "legendary_actions": [{"name": la.name, "desc": la.description} for la in m.legendary_actions] if m.legendary_actions else [],
         "reactions": [{"name": r.name, "desc": r.description} for r in m.reactions] if m.legendary_actions else [],
         "spell_list": {
+            "desc": m.spell_list["desc"] if m.spell_list is not None and m.spell_list["desc"] is not None else None,
             "cantrips": m.spell_list["cantrips"].split(",") if m.spell_list is not None and m.spell_list["cantrips"] is not None else [],
             "first": m.spell_list["first"].split(",") if m.spell_list is not None and m.spell_list["first"] is not None else [],
             "second": m.spell_list["second"].split(",") if m.spell_list is not None and m.spell_list["second"] is not None else [],
